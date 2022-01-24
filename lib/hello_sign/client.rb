@@ -155,11 +155,11 @@ module HelloSign
 
       if options[:no_auth]
       elsif auth_token
-        connection.authorization :Bearer, auth_token
+        connection.request :authorization, 'Bearer', auth_token
       elsif api_key
-        connection.basic_auth api_key, ''
+        connection.request :authorization, :basic, api_key, 'password'
       elsif email_address
-        connection.basic_auth email_address, password
+        connection.request :authorization, :basic, 'username', 'password'
       else
       end
       if proxy_uri
